@@ -1,0 +1,704 @@
+<%@language="vbscript"%>
+
+<%t = request.querystring("t")%>
+
+<html>
+
+
+
+<head>
+
+<link rel="stylesheet" href="style.css">
+
+<title>Kreeda Games : Online Oredering</title>
+
+<script language="javascript">
+
+function doSubmit()
+
+{
+
+title = document.frmorder.game_title.value;
+
+email = document.frmorder.email.value;
+
+uname = document.frmorder.name.value;
+
+comment = document.frmorder.comment.value;
+
+birthdayMonth = document.frmorder.birthdayMonth.value;
+
+birthdayDay = document.frmorder.birthdayDay.value;
+
+birthdayYear = document.frmorder.birthdayYear.value;
+
+city = document.frmorder.address_city.value;
+
+state = document.frmorder.address_state.value;
+
+zip = document.frmorder.address_zip.value;
+
+gender = document.frmorder.gender.value;
+
+phone = document.frmorder.phone1.value;
+
+street = document.frmorder.address_street.value;
+
+len=document.frmorder.game_title.length-1
+
+var tot="";
+
+	for(i=0;i<len;i++)
+
+	{
+
+		if(document.frmorder.game_title.options[i].selected)
+
+		{
+
+		chosen=document.frmorder.game_title.options[i].value
+
+		tot=tot+","+chosen;
+
+		}
+
+	}
+
+	tot=tot.substring(1,tot.length)
+
+	
+
+		if(tot.length==0)
+
+		{
+
+		alert("Please Select the Game to Order")
+
+		document.frmorder.game_title.focus();
+
+		return false;
+
+		}
+
+
+
+elen= email.length;
+
+	efirstchar = email.substring(0, 1);
+
+	elastchar  = email.substring(elen-1, elen);
+
+
+
+	atPos = email.indexOf("@",1)	
+
+	if (atPos == -1) 
+
+	{
+
+		alert("Please Enter Valid Email Id");
+
+		document.frmorder.email.focus();
+
+		document.frmorder.email.select();
+
+		return 0;
+
+	}
+
+	if (email.indexOf("@",atPos+1) != -1) 
+
+	{
+
+	alert("Please Enter Valid Email Id");
+
+		document.frmorder.email.focus();
+
+		document.frmorder.email.select(); 
+
+		return 0;
+
+	}
+
+	periodPos = email.indexOf(".",atPos)
+
+	if (periodPos == -1) 
+
+	{	
+
+	alert("Please Enter Valid Email Id");
+
+		document.frmorder.email.focus();
+
+		document.frmorder.email.select();
+
+		return 0;
+
+	}
+
+	if (periodPos+3 > elen)	
+
+	{ alert("Please Enter Valid Email Id");
+
+		document.frmorder.email.focus();
+
+		document.frmorder.email.select();
+
+		return 0;
+
+	}
+
+	if (email.indexOf("..",1) != -1)
+
+	 {
+
+	alert("Please Enter Valid Email Id");
+
+		document.frmorder.email.focus();
+
+		document.frmorder.email.select();
+
+		return 0;
+
+	}
+
+	if (email.indexOf("@.",1) != -1) {
+
+	alert("Please Enter Valid Email Id");
+
+		document.frmorder.email.focus();
+
+		document.frmorder.email.select();
+
+		return 0;
+
+	}
+
+	if (email.indexOf(".@",1) != -1)
+
+	 {
+
+	 alert("Please Enter Valid Email Id");
+
+		document.frmorder.email.focus();
+
+		document.frmorder.email.select();
+
+		return 0;
+
+	}
+
+if (email.indexOf("-@",1) != -1)
+
+	 {
+
+	 alert("Please Enter Valid Email Id");
+
+		document.frmorder.email.focus();
+
+		document.frmorder.email.select();
+
+		return 0;
+
+	}
+
+if (email.indexOf("@-",1) != -1)
+
+	 {
+
+	 alert("Please Enter Valid Email Id");
+
+		document.frmorder.email.focus();
+
+		document.frmorder.email.select();
+
+		return 0;
+
+	}
+
+if (email.indexOf("-.",1) != -1)
+
+	 {
+
+	 alert("Please Enter Valid Email Id");
+
+		document.frmorder.email.focus();
+
+		document.frmorder.email.select();
+
+		return 0;
+
+	}
+
+if (email.indexOf(".-",1) != -1)
+
+	 {
+
+	 alert("Please Enter Valid Email Id");
+
+		document.frmorder.email.focus();
+
+		document.frmorder.email.select();
+
+		return 0;
+
+	}
+
+if (email.indexOf("--",1) != -1)
+
+	 {
+
+	 alert("Please Enter Valid Email Id");
+
+		document.frmorder.email.focus();
+
+		document.frmorder.email.select();
+
+		return 0;
+
+	}        
+
+if((efirstchar<"a" || efirstchar>"z") && (efirstchar<"A" || efirstchar>"Z"))
+
+	{
+
+	alert("Please Enter Valid Email Id");
+
+		document.frmorder.email.focus();
+
+		document.frmorder.email.select();
+
+		return 0;
+
+	}
+
+
+
+	if((elastchar<"a" || elastchar>"z") && (elastchar<"A" || elastchar>"Z"))
+
+	{
+
+		alert("Please Enter Valid Email Id");
+
+		document.frmorder.email.focus();
+
+		document.frmorder.email.select();	
+
+		return 0;
+
+	}
+
+
+
+    	for (var i = 1; i < elen; i++)
+
+		{
+
+		var ch = email.substring(i, i + 1);
+
+		if ( ((ch < "a" || "z" < ch) && (ch < "A" || "Z" < ch)) && (ch < "0" || "9" < ch) && (ch != '_') && (ch != "@") && (ch != ".") && (ch !="-"))
+
+		{	
+
+			alert("Please Enter Valid Email Id");
+
+		document.frmorder.email.focus();
+
+		document.frmorder.email.select();
+
+			return 0;
+
+		}
+
+		}
+
+	if ( (uname.length==0) || ( (uname.substring(0,1)==" ") && (uname.length==1) ) )
+
+	{
+
+	alert("Please Enter Your Name");
+
+	document.frmorder.name.focus();
+
+	return false;
+
+	}
+
+	if(document.frmorder.no_newsletter.type == "checkbox")
+
+	{
+
+	if(document.frmorder.no_newsletter.checked == true)
+
+	document.frmorder.newsletter.value="chkd"
+
+	}
+
+document.frmorder.action="orderhandler.asp"
+
+document.frmorder.submit();
+
+}
+
+</script>
+
+</head>
+<body topmargin="0" leftmargin="0">
+                        <form name="frmorder" method="post">
+                                        <input type="hidden" name="newsletter">
+<table border="0" cellpadding="0" cellspacing="0" width="779">
+  <tr>
+    <td width="10"><img border="0" src="spacer.gif" width="1" height="1"></td>
+    <td width="130" valign="top">
+      <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tr>
+          <td width="100%" height="68"><img border="0" src="spacer.gif" width="1" height="1"></td>
+        </tr>
+        <tr>
+          <td width="100%" align="center"><a href="index.html"><img border="0" src="kreeda.gif" width="130" height="73" alt="Home"></a></td>
+        </tr>
+        <tr>
+          <td width="100%" height="20"><img border="0" src="spacer.gif" width="1" height="1"></td>
+        </tr>
+        <tr>
+          <td width="100%" align="right"><img border="0" src="art_triangles.gif" width="37" height="220" alt="Kreeda"></td>
+        </tr>
+      </table>
+    </td>
+    <td width="499" valign="top">
+      <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tr>
+          <td width="100%" height="20"><img border="0" src="spacer.gif" width="1" height="1"></td>
+        </tr>
+        <tr>
+          <td width="100%">
+            <table border="0" cellpadding="0" cellspacing="0" width="100%">
+              <tr>
+                <td width="75" height="48"><img border="0" src="spacer.gif" width="1" height="1"></td>
+                <td width="75" height="48"><img border="0" src="spacer.gif" width="1" height="1"></td>
+                <td width="75" height="48"><img border="0" src="spacer.gif" width="1" height="1"></td>
+                <td width="75" height="48"><img border="0" src="spacer.gif" width="1" height="1"></td>
+                <td width="124" height="109" rowspan="2" class="bgpurchase" align="center"><img border="0" src="purchase_games_top_active.gif" alt="Purchase Games" width="109" height="109"></td>
+                <td width="75" height="48"><img border="0" src="spacer.gif" width="1" height="1"></td>
+              </tr>
+              <tr>
+                <td width="75" height="61" class="bgwork"><a href="research.html"><img border="0" src="our_work_top.gif" width="61" height="61" alt="Our Work"></a></td>
+                <td width="75" class="bgwhy" height="61"><a href="why_play.html"><img border="0" src="why_games_top.gif" alt="Why Games" width="61" height="61"></a></td>
+                <td width="75" height="61" class="bgabout"><a href="about_us.html"><img border="0" src="about_us_top.gif" width="61" height="61"></a></td>
+                <td width="75" height="54" class="bginter"><a href="contribute_exp.asp"><img border="0" src="interaction_top.gif" width="61" height="61"></a></td>
+                <td width="75" height="61" class="bggames"><a href="games.html"><img border="0" src="games_top.gif" width="61" height="61" alt="Games"></a></td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td width="100%">
+          <table border="0" cellpadding="10" cellspacing="0" width="100%">
+            <tr>
+              <td width="100%" class="bgpurchase">
+               <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr>
+        <td width="100%">
+          <table border="0" cellpadding="0" width="100%" cellspacing="0">
+            <tr>
+              <td width="50%" class="top_purchase" onmouseout="this.className='top_purchase'" onmouseover="this.className='top_purchase_active'"><a href="purchase_games.html" class="top_purchase">Where
+                Available</a></td>
+              <td width="1" class="line"><img border="0" src="spacer.gif" width="1" height="1"></td>
+              <td width="50%" class="top_purchase_active">Online Ordering</td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td width="100%" class="line" height="1"><img border="0" src="spacer.gif" width="1" height="1"></td>
+      </tr>
+      <tr>
+        <td width="100%">
+    <table border="0" cellpadding="5" cellspacing="5" width="100%">
+      <tr>
+        <td width="100%" class="inter_title">Order Online - The online order is 
+temporarily not  working. Kindly select the games from the list and send your orders to 
+        <B>"info@kreedagames.com"</B> with your complete postal address, contact name, telephone number and email ID
+.</td>
+      </tr>
+      <script language="javascript">
+
+      if (location.href.indexOf("?")>-1)
+
+      document.write('<tr><td width="100%" class="inter_title"><font color="#ffffff">Thank you for your submission&nbsp;</font></td></tr>')
+
+      </script>      
+
+      <tr>
+
+        <td width="100%" class="content">
+
+          <table border="0" cellpadding="4" cellspacing="1" width="100%" bgcolor="#FFFFFF">
+
+            <tr>
+
+              <td width="50%" class="form_content" bgcolor="#F4F0E8">Title for the game
+
+                <font color="#FF0000">*</font></td>
+
+              <td width="50%" bgcolor="#F4F0E8">
+
+              <SELECT NAME="game_title" multiple size="5">
+
+<option value="AADU PULI AATAM">AADU PULI AATAM</option>
+
+<option value="ASHTAA CHEMMAA">ASHTAA CHEMMAA</option>
+
+<option value="BAMBARAM">BAMBARAM</option>
+
+<option value="CHAUPAD">CHAUPAD</option>
+
+<option value="CHIRMI">CHIRMI</option>
+
+<option value="CHINESEPIEL">CHINESEPIEL</option>
+
+<option value="DAHDI">DAHDI</option>
+
+<option value="FOUR SHELLS">FOUR SHELLS</option>
+
+<option value="FIVE STONES">FIVE STONES</option>
+
+<option value="GILLI DANDA">GILLI DANDA</option>
+
+<option value="KATTAM VILAYATTU">KATTAM VILAYATTU</option>
+
+<option value="MARBLES (GOLI)">MARBLES (GOLI)</option>
+
+<option value="NUNGU VANDI">NUNGU VANDI</option>
+
+<option value="PARAMA PADA SOPANAM">PARAMA PADA SOPANAM</option>
+
+<option value="PALLANGUZHI">PALLANGUZHI</option>
+
+<option value="SEARCH FOR SITA">SEARCH FOR SITA</option>
+
+<option value="TAMARIND SEEDS">TAMARIND SEEDS</option>
+
+<option value="THE HOOP STICK">THE HOOP STICK</option>
+
+</SELECT></td>
+
+            </tr>
+
+            <tr>
+
+              <td width="50%" class="form_content" bgcolor="#F4F0E8">Email address
+
+                <font color="#FF0000">*</font></td>
+
+              <td width="50%" bgcolor="#F4F0E8"><input type="text" name="email" size="30"></td>
+
+            </tr>
+
+            <tr>
+
+              <td width="50%" class="form_content" bgcolor="#F4F0E8">Name <font color="#FF0000">*</font></td>
+
+              <td width="50%" bgcolor="#F4F0E8"><input type="text" name="name" size="30"></td>
+
+            </tr>
+
+            <tr>
+
+              <td width="50%" class="form_content" bgcolor="#F4F0E8">D.O.B</td>
+
+              <td width="50%" bgcolor="#F4F0E8"><select name="birthdayMonth" size="1">
+
+<option value="Not Given">MON</option>
+
+<option value="January">Jan</option>
+
+<option value="February">Feb</option>
+
+<option value="March">Mar</option>
+
+<option value="April">Apr</option>
+
+<option value="May">May</option>
+
+<option value="June">Jun</option>
+
+<option value="July">Jul</option>
+
+<option value="August">Aug</option>
+
+<option value="September">Sep</option>
+
+<option value="October">Oct</option>
+
+<option value="November">Nov</option>
+
+<option value="December">Dec</option>
+
+</select>&nbsp;<b>/</b>&nbsp;<select name="birthdayDay" size="1">
+
+<option value="Not Given">DAY</option>
+
+<script language="javascript">
+
+for (var i=1;i<=31;i++) 
+
+document.write("<option value="+i+">"+i+"</option>")
+
+</script>
+
+</select>&nbsp;<b>/</b>&nbsp;<select name="birthdayYear" size="1">
+
+<option value="Not Given">YEAR</option>
+
+<script language="javascript">
+
+for (var i=1950;i<=new Date().getYear()-2;i++) 
+
+document.write("<option value="+i+">"+i+"</option>")
+
+</script>
+
+</select></td>
+
+            </tr>
+
+            <tr>
+
+              <td width="50%" class="form_content" bgcolor="#F4F0E8">Address for communication</td>
+
+              <td width="50%" bgcolor="#F4F0E8"><textarea rows="2" name="address_street" cols="23"></textarea></td>
+
+            </tr>
+
+            <tr>
+
+              <td width="50%" class="form_content" bgcolor="#F4F0E8">City</td>
+
+              <td width="50%" bgcolor="#F4F0E8"><input type="text" name="address_city" size="30"></td>
+
+            </tr>
+
+            <tr>
+
+              <td width="50%" class="form_content" bgcolor="#F4F0E8">State</td>
+
+              <td width="50%" bgcolor="#F4F0E8"><input type="text" name="address_state" size="30"></td>
+
+            </tr>
+
+            <tr>
+
+              <td width="50%" class="form_content" bgcolor="#F4F0E8">Zip Code</td>
+
+              <td width="50%" bgcolor="#F4F0E8"><input type="text" name="address_zip" size="30"></td>
+
+            </tr>
+
+            <tr>
+
+              <td width="50%" class="form_content" bgcolor="#F4F0E8">Gender</td>
+
+              <td width="50%" bgcolor="#F4F0E8"><SELECT NAME="gender">
+
+<option value="">Click to choose</option>
+
+<option value="Male">Male</option>
+
+<option value="Female">Female</option>
+
+</select></td>
+
+            </tr>
+
+            <tr>
+
+              <td width="50%" class="form_content" bgcolor="#F4F0E8">Phone</td>
+
+              <td width="50%" bgcolor="#F4F0E8"><input type="text" name="phone1" size="30"></td>
+
+            </tr>
+
+            <tr>
+
+              <td width="50%" class="form_content" bgcolor="#F4F0E8">Comment</td>
+
+              <td width="50%" bgcolor="#F4F0E8">
+
+              <textarea rows="2" name="comment" cols="23"></textarea></td>
+
+            </tr>
+
+            <tr>
+
+              <td width="100%" colspan="2" class="form_content" bgcolor="#F4F0E8"><B><INPUT TYPE="checkbox" NAME="no_newsletter" VALUE="no newsletter">
+
+                </B>Click here if you prefer not to receive newsletters or special offers.</td>
+
+            </tr>
+
+            <tr>
+
+              <td width="100%" colspan="2" class="form_content" style="background-color: #F1EADC"><font color="#FF0000">*
+
+                marked fields are mandatory.</font></td>
+
+            </tr>            
+
+            <tr>
+
+              <td width="100%" colspan="2" align="center"><INPUT TYPE="button" NAME="pbsubmit" VALUE="Order" onclick="doSubmit()">
+
+                <INPUT TYPE="reset" NAME="reset" VALUE="Reset Form"></td>
+
+            </tr>
+
+          </table>
+
+        </td>
+
+      </tr>
+
+    </table>
+
+        </td>
+
+      </tr>
+
+    </table>
+
+              </td>
+
+            </tr>
+
+          </table>
+
+          </td>
+
+        </tr>
+
+      </table>
+
+    </td>
+
+    <td width="140"><img border="0" src="spacer.gif" width="1" height="1"></td>
+
+  </tr>  <tr>
+
+    <td width="784" colspan="7" align="center" class="copyright">© Copyright
+
+      Kreeda™, All rights reserved.&nbsp;<br>
+
+      Designed &amp; Developed by <a href="http://www.e-pagemaker.com" target="_blank"> <font class="epagemaker"><b> ePagemaker</b></font></a><font class="epagemaker"><b></b></font></td>
+
+  </tr>
+
+</table>
+
+</form>
+
+</body>
+
+
+
+</html>
